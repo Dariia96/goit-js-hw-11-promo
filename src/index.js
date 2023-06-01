@@ -1,6 +1,6 @@
 import './css/styles.css';
-import { fetchCountries } from './service/fetchCountries';
-import axios, * as others from 'axios';
+import axios from 'axios';
+/*import axios, * as others from 'axios';*/
 import Notiflix from 'notiflix';
 
 const form = document.querySelector('.search-form');
