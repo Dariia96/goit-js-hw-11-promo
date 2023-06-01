@@ -27,16 +27,17 @@ function handlerPagination(entries, observer) {
             servicePicture(page)
                     .then(pictures => {
                         gallery.insertAdjacentHTML('beforeend', createMarkup(pictures));
-                        
+                        /*const lightbox = new SimpleLightbox('.gallery__link', { captionsData: "alt", captionDelay: "250" }).refresh();*/
                     if (pictures.data.totalHits < pictures.data.hits.length) {
                     observer.unobserve(guard);
                     }
                     else if(pictures.data.totalHits = pictures.data.hits.length){
                         Notiflix.Notify.failure("We're sorry, but you've reached the end of search results.")
-                } 
+                        } 
+                        
                 })
         }
-    })
+   /*form.reset()*/})
 }
 
 form.addEventListener('submit', handlerSearchForm)
@@ -53,7 +54,7 @@ function handlerSearchForm  (event) {
                 
                 console.log(pictures)
                 gallery.innerHTML = createMarkup(pictures)
-                const lightbox = new SimpleLightbox('.gallery__link', { captionsData: "alt", captionDelay: "250" });
+                const lightbox = new SimpleLightbox('.gallery__link', { captionsData: "alt", captionDelay: "250" }).refresh();
 
                 if (pictures.data.totalHits > pictures.data.hits.length) {
                     observer.observe(guard);
@@ -64,7 +65,7 @@ function handlerSearchForm  (event) {
     
             .catch(error => console.log(error));
     
-            form.reset()
+            
 
 }
 
@@ -74,7 +75,7 @@ async function servicePicture( page = 1) {
 
     // return fetch(`${BASE_URL}/forecast.json?key=${API_KEY}&q=${city}&days=${days}&lang=uk`).then(resp => console.log(resp))
     let pictureName = input.value.trim();
-    
+
     const params = new URLSearchParams({
         key: API_KEY,
         q: pictureName,
