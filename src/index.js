@@ -23,12 +23,15 @@ function handlerPagination(entries, observer) {
     console.log(entries);
     entries.forEach((entry) => {
         if (entry.isIntersecting) {
+             
             page += 1;
+            
             servicePicture(page)
                     .then(pictures => {
                         gallery.insertAdjacentHTML('beforeend', createMarkup(pictures));
                         /*const lightbox = new SimpleLightbox('.gallery__link', { captionsData: "alt", captionDelay: "250" }).refresh();*/
-                    if (pictures.data.totalHits < pictures.data.hits.length) {
+                   const lightbox = new SimpleLightbox('.gallery__link', { captionsData: "alt", captionDelay: "250" }).refresh();
+                        if (pictures.data.totalHits < pictures.data.hits.length) {
                     observer.unobserve(guard);
                     }
                     else if(pictures.data.totalHits = pictures.data.hits.length){
